@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" data-color="black-gold" data-font="syne">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#08080c">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="description" content="Finance Tracker Pro — Premium Personal Finance Management">
+<title>Finance Tracker Pro</title>
+<link rel="manifest" href="manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Mono:wght@300;400;500&family=Lexend:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&family=Sora:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ===== SPLASH SCREEN ===== -->
+<div id="splash" class="splash">
+  <div class="splash-inner">
+    <svg class="splash-logo" viewBox="0 0 140 140" fill="none">
+      <circle class="ring r1" cx="70" cy="70" r="62" stroke-width="1.2"/>
+      <circle class="ring r2" cx="70" cy="70" r="48" stroke-width="0.8"/>
+      <circle class="ring r3" cx="70" cy="70" r="34" stroke-width="0.6"/>
+      <polyline class="chart-line" points="28,100 48,72 62,82 78,48 94,58 112,30" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle class="chart-dot" cx="112" cy="30" r="5"/>
+      <circle class="chart-dot-glow" cx="112" cy="30" r="12"/>
+    </svg>
+    <h1 class="splash-title"><span>FINANCE</span><span>TRACKER PRO</span></h1>
+    <p class="splash-quote">"The best investment you can make is in yourself."</p>
+    <div class="splash-bar"><div class="splash-bar-fill"></div></div>
+  </div>
+</div>
+
+<!-- ===== PIN LOCK ===== -->
+<div id="pinLock" class="pin-lock hidden">
+  <div class="pin-inner">
+    <div class="pin-icon">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/><circle cx="12" cy="16" r="1"/></svg>
+    </div>
+    <h2>Enter PIN</h2>
+    <div class="pin-dots"><span></span><span></span><span></span><span></span></div>
+    <div class="pin-pad">
+      <button onclick="Pin.press(1)">1</button><button onclick="Pin.press(2)">2</button><button onclick="Pin.press(3)">3</button>
+      <button onclick="Pin.press(4)">4</button><button onclick="Pin.press(5)">5</button><button onclick="Pin.press(6)">6</button>
+      <button onclick="Pin.press(7)">7</button><button onclick="Pin.press(8)">8</button><button onclick="Pin.press(9)">9</button>
+      <button class="pin-empty"></button><button onclick="Pin.press(0)">0</button><button onclick="Pin.del()" class="pin-del">⌫</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MAIN APP ===== -->
+<div id="app" class="app hidden">
+
+  <!-- SIDEBAR (tablet+) -->
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-brand">
+      <svg width="28" height="28" viewBox="0 0 140 140" fill="none"><polyline points="10,100 35,60 55,75 75,35 95,50 120,20" stroke="var(--accent)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>FTP</span>
+    </div>
+    <nav class="sidebar-nav" id="sidebarNav"></nav>
+    <div class="sidebar-footer">
+      <button class="sidebar-btn" onclick="App.navigate('settings')">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        <span>Settings</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main id="main" class="main">
+
+    <!-- TOP BAR -->
+    <header class="topbar">
+      <button class="topbar-menu" id="menuBtn" onclick="UI.toggleSidebar()">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="15" y2="12"/><line x1="3" y1="18" x2="18" y2="18"/></svg>
+      </button>
+      <div class="topbar-title" id="topbarTitle">Dashboard</div>
+      <button class="topbar-action" onclick="UI.openSearch()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+    </header>
+
+    <!-- VIEWS -->
+    <div id="views" class="views">
+
+      <!-- DASHBOARD -->
+      <section id="view-dashboard" class="view active">
+        <div class="dash-greeting">
+          <div><h2 id="greetText">Good Morning</h2><p id="greetDate"></p></div>
+          <div class="quote-badge" id="dailyQuote">💡</div>
+        </div>
+        <div class="networth-card glass" onclick="App.navigate('savings')">
+          <div class="nw-label">Total Net Worth</div>
+          <div class="nw-value" id="nwValue">₹0</div>
+          <div class="nw-change" id="nwChange"><span>—</span></div>
+          <div class="nw-spark"><canvas id="nwSpark" height="40"></canvas></div>
+        </div>
+        <div class="kpi-grid" id="kpiGrid"></div>
+        <div class="health-row glass">
+          <div class="health-gauge"><canvas id="healthCanvas" width="160" height="160"></canvas></div>
+          <div class="health-info"><div class="health-score" id="healthScore">0</div><div class="health-label" id="healthLabel">Calculating…</div></div>
+        </div>
+        <div class="chart-card glass">
+          <div class="chart-head"><h3>Cash Flow</h3><div class="period-tabs" id="dashPeriodTabs"><button class="ptab active" data-p="6">6M</button><button class="ptab" data-p="12">1Y</button></div></div>
+          <canvas id="dashChart" height="220"></canvas>
+        </div>
+        <div class="insights-card glass">
+          <div class="insights-head"><span class="ai-tag">AI</span><h3>Smart Insights</h3></div>
+          <div id="insightsList" class="insights-list"></div>
+        </div>
+        <div class="recent-card glass">
+          <div class="card-top"><h3>Recent Transactions</h3><button class="link-btn" onclick="App.navigate('income')">View All</button></div>
+          <div id="recentList" class="tx-list"></div>
+        </div>
+      </section>
+
+      <!-- INCOME -->
+      <section id="view-income" class="view">
+        <div class="view-top"><h2>Income</h2><button class="accent-btn" onclick="Modal.openAddTx('income')">+ Add Income</button></div>
+        <div class="summary-row" id="incomeSummary"></div>
+        <div class="chart-card glass"><div class="chart-head"><h3>Income Trend</h3></div><canvas id="incomeChart" height="200"></canvas></div>
+        <div class="filter-bar glass"><select id="incomeFilter" onchange="Income.render()"><option value="all">All Categories</option></select><input type="month" id="incomeMonth" onchange="Income.render()"></div>
+        <div id="incomeList" class="tx-list"></div>
+      </section>
+
+      <!-- EXPENSE -->
+      <section id="view-expense" class="view">
+        <div class="view-top"><h2>Expenses</h2><button class="accent-btn" onclick="Modal.openAddTx('expense')">+ Add Expense</button></div>
+        <div class="summary-row" id="expenseSummary"></div>
+        <div class="chart-card glass"><div class="chart-head"><h3>Spending Breakdown</h3></div><canvas id="expenseChart" height="220"></canvas></div>
+        <div class="filter-bar glass"><select id="expenseFilter" onchange="Expense.render()"><option value="all">All Categories</option></select><input type="month" id="expenseMonth" onchange="Expense.render()"></div>
+        <div id="expenseList" class="tx-list"></div>
+      </section>
+
+      <!-- SAVINGS -->
+      <section id="view-savings" class="view">
+        <div class="view-top"><h2>Savings & Wealth</h2></div>
+        <div class="summary-row" id="savingsSummary"></div>
+        <div class="chart-card glass"><div class="chart-head"><h3>Wealth Accumulation</h3></div><canvas id="savingsChart" height="220"></canvas></div>
+        <div class="savings-metrics glass" id="savingsMetrics"></div>
+      </section>
+
+      <!-- GOALS -->
+      <section id="view-goals" class="view">
+        <div class="view-top"><h2>Financial Goals</h2><button class="accent-btn" onclick="Modal.openAddGoal()">+ New Goal</button></div>
+        <div id="goalsList" class="goals-grid"></div>
+      </section>
+
+      <!-- CALENDAR -->
+      <section id="view-calendar" class="view">
+        <div class="view-top"><h2>Calendar</h2></div>
+        <div class="cal-nav glass"><button onclick="Calendar.prev()">‹</button><span id="calTitle"></span><button onclick="Calendar.next()">›</button></div>
+        <div class="cal-grid glass" id="calGrid"></div>
+        <div class="cal-stats glass" id="calStats"></div>
+      </section>
+
+      <!-- REPORTS -->
+      <section id="view-reports" class="view">
+        <div class="view-top"><h2>Reports</h2><button class="accent-btn" onclick="Reports.export()">Export</button></div>
+        <div class="report-period glass">
+          <select id="reportPeriod" onchange="Reports.generate()"><option value="month">This Month</option><option value="quarter">This Quarter</option><option value="year">This Year</option></select>
+        </div>
+        <div id="reportContent" class="report-content"></div>
+      </section>
+
+      <!-- REMINDERS -->
+      <section id="view-reminders" class="view">
+        <div class="view-top"><h2>Reminders</h2><button class="accent-btn" onclick="Modal.openAddReminder()">+ Add Reminder</button></div>
+        <div id="remindersList" class="reminders-list"></div>
+      </section>
+
+      <!-- NOTES -->
+      <section id="view-notes" class="view">
+        <div class="view-top"><h2>Financial Journal</h2><button class="accent-btn" onclick="Modal.openAddNote()">+ New Note</button></div>
+        <div id="notesList" class="notes-list"></div>
+      </section>
+
+      <!-- SETTINGS -->
+      <section id="view-settings" class="view">
+        <div class="view-top"><h2>Settings</h2></div>
+        <div class="settings-groups" id="settingsContent"></div>
+      </section>
+
+    </div><!-- /views -->
+  </main>
+
+  <!-- BOTTOM NAV (mobile) -->
+  <nav id="bottomNav" class="bottomnav">
+    <button class="bnav active" data-v="dashboard" onclick="App.navigate('dashboard')">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+      <span>Dashboard</span>
+    </button>
+    <button class="bnav" data-v="income" onclick="App.navigate('income')">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+      <span>Income</span>
+    </button>
+    <button class="bnav" data-v="expense" onclick="App.navigate('expense')">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+      <span>Expense</span>
+    </button>
+    <button class="bnav" data-v="goals" onclick="App.navigate('goals')">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+      <span>Goals</span>
+    </button>
+    <button class="bnav" data-v="more" onclick="UI.toggleMore()">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+      <span>More</span>
+    </button>
+  </nav>
+</div><!-- /app -->
+
+<!-- FAB -->
+<button id="fab" class="fab hidden" onclick="Fab.action()">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+</button>
+
+<!-- MORE DRAWER -->
+<div id="moreDrawer" class="more-drawer hidden">
+  <div class="more-overlay" onclick="UI.toggleMore()"></div>
+  <div class="more-panel glass">
+    <h3>More</h3>
+    <button onclick="App.navigate('savings');UI.toggleMore()">💰 Savings & Wealth</button>
+    <button onclick="App.navigate('calendar');UI.toggleMore()">📅 Calendar</button>
+    <button onclick="App.navigate('reports');UI.toggleMore()">📊 Reports</button>
+    <button onclick="App.navigate('reminders');UI.toggleMore()">🔔 Reminders</button>
+    <button onclick="App.navigate('notes');UI.toggleMore()">📝 Journal</button>
+    <button onclick="App.navigate('settings');UI.toggleMore()">⚙️ Settings</button>
+  </div>
+</div>
+
+<!-- MODAL OVERLAY -->
+<div id="modalOverlay" class="modal-overlay hidden" onclick="Modal.close()">
+  <div class="modal glass" onclick="event.stopPropagation()">
+    <div class="modal-top"><h3 id="modalTitle"></h3><button class="modal-x" onclick="Modal.close()">✕</button></div>
+    <div id="modalBody" class="modal-body"></div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toasts" class="toast-wrap"></div>
+
+<!-- SEARCH OVERLAY -->
+<div id="searchOverlay" class="search-overlay hidden">
+  <div class="search-bar"><input id="searchInput" type="text" placeholder="Search transactions…" oninput="UI.doSearch(this.value)"><button onclick="UI.closeSearch()">✕</button></div>
+  <div id="searchResults" class="search-results"></div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
